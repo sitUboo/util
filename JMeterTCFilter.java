@@ -30,18 +30,20 @@ public class JMeterTCFilter extends Task {
         Elements headers = summaryTable.getElementsByTag("th");
         Elements tdatas = summaryTable.getElementsByTag("td");
         for(int i=0;i < headers.size();i++){
-            hashMap.put(headers.get(i),tdatas.get(i));
-        }
-        for (Map.Entry<Element, Element> entry : hashMap.entrySet()) {
-            String key = entry.getKey().text();
-            String value = entry.getValue().text();
-	    key = key.replaceAll("\\s+", "");
-	    if(value.endsWith(" ms")){
-		    value = value.replace(" ms","");
-	    }
-	    if(value.endsWith("%")){
-		    value = value.replace("%","");
-	    }
+//            hashMap.put(headers.get(i),tdatas.get(i));
+//        }
+//        for (Map.Entry<Element, Element> entry : hashMap.entrySet()) {
+//            String key = entry.getKey().text();
+            String key = headers.get(i).text();
+//            String value = entry.getValue().text();
+            String value = tdatas.get(i).text();
+            key = key.replaceAll("\\s+", "");
+            if(value.endsWith(" ms")){
+              value = value.replace(" ms","");
+            }
+            if(value.endsWith("%")){
+              value = value.replace("%","");
+            }
             System.out.println(tcslug + " key='" + key + "' value='" + value + "']");
         }
     }
